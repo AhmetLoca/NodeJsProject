@@ -1,13 +1,11 @@
 {
-  "name" : "nodeblog",
-  "description" : "Node Blog Application",
-  "main" : "app.js",
-  "scripts": {
-    "test" : "echo \"Error: no test specified\"&& exit 1"
-  },
+  "name": "nodeblog",
+  "description": "Node Blog Application",
+  "main": "app.js",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
   },
-  "author" : "",
-  "license" :"ISC"
+  "author": "",
+  "license": "ISC"
 }
