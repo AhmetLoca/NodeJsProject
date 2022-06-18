@@ -4,10 +4,20 @@ const app = express()
 const port = 3000
 const hostname = '127.0.0.1'
 
+//middleware 
 app.use(express.static('public'))
+//index.html 'de herhangi bir statik dosyaya bakmak istiyorsa önce public dosyamızın içerisine gidiyor. Sonra public dosyasının içerisindeki css dosyasına gidiyor. Ve oradaki css dosyalarını çekiyor. 
 
 app.get('/',(req,res) => {
-  res.send('Index Page')
+  res.sendFile(path.resolve(__dirname, 'site/index.html'))
+})
+
+app.get('/about',(req,res) => {
+  res.sendFile(path.resolve(__dirname, 'site/about.html'))
+})
+
+app.get('/blog',(req,res) => {
+  res.sendFile(path.resolve(__dirname, 'site/blog.html'))
 })
 
 app.listen(port, hostname, ()=> {
