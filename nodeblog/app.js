@@ -1,4 +1,3 @@
-//Protocol
 const http = require('http')
 const fs = require('fs')
 
@@ -6,7 +5,12 @@ const fs = require('fs')
 const hostname = '127.0.0.1'
 const port = 3000
 
-const indexPage = fs.readFileSync('index.html') /* readFileSync yardımıyla çağırıyoruz. readFileSync metodu senkron olarak çalışır. readFile metodu da asenkron olarak calısır. (callback kullanmadıgımız zaman bir asenkron metotta hata alıyoruz. node.js'in asenkron metotları 2.parametre olarak callback fonksiyonu alır.) */
+const indexPage = fs.readFileSync('index.html') 
+/* readFileSync yardımıyla çağırıyoruz. 
+readFileSync metodu senkron olarak çalışır. 
+readFile metodu da asenkron olarak calısır. 
+(callback kullanmadıgımız zaman bir asenkron metotta hata alıyoruz. 
+node.js'in asenkron metotları 2.parametre olarak callback fonksiyonu alır.) */
 const aboutPage = fs.readFileSync('about.html')
 const contactPage = fs.readFileSync('contact.html')
 const errorPage = fs.readFileSync('404.html')
