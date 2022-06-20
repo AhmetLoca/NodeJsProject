@@ -2,6 +2,8 @@
 const express = require('express')
 const router = express.Router() //bu Router class'i bir middleware. app.js içerisinde middleware kullanarak gerekli olan yönlendirmeleri yapacagız.
 
+const Post = require('../models/Post')
+
 router.get('/',(req,res) => {
   res.render('site/index') //render express'e ait olan bir fonksiyon.
 })
@@ -11,7 +13,10 @@ router.get('/about',(req,res) => {
 })
 
 router.get('/blog',(req,res) => {
-  res.render('site/blog')
+  /*Veritabanindaki tüm postlari bul. Sonrasında bu postslari site/blog içerisine gönder. Posts olarak. */
+  Post.find({}).then(posts => {
+    res.render('site/blog', {posts:posts})
+  })
 })
 
 router.get('/contact',(req,res) => {
