@@ -1,4 +1,3 @@
-const path = require('path')
 const express = require('express')
 const exphbs =require('express-handlebars');
 const app = express()
@@ -6,6 +5,7 @@ const port = 3000
 const hostname = '127.0.0.1'
 const mongoose = require('mongoose') 
 //mongoDByi indirip projemize require ettik
+const bodyParser = require('body-parser')
 
 //MongoDB'e baglanti oluşturduk
 mongoose.connect('mongodb://127.0.0.1/nodeblog_db',{
@@ -22,32 +22,18 @@ app.engine('handlebars',exphbs.engine())
 //exphbs fonksiyonu default olarak layout klasörünün içerisine girip main.handlebars'i alıyor
 app.set('view engine','handlebars')
 
+//parse application/x-www.-form-urlencoded
+app.use(bodyParser.urlencoded({ extended : false }))
+
+//parse application/json
+app.use(bodyParser.json())
 
 
-app.get('/',(req,res) => {
-  res.render('site/index') //render express'e ait olan bir fonksiyon.
-})
 
-app.get('/about',(req,res) => {
-  res.render('site/about')
-})
-
-app.get('/blog',(req,res) => {
-  res.render('site/blog')
-})
-
-app.get('/contact',(req,res) => {
-  res.render('site/contact')
-})
-
-app.get('/login',(req,res) => {
-  res.render('site/login')
-})
-
-app.get('/register',(req,res) => {
-  res.render('site/register')
-})
-
+const main = require('./routes/main')
+const posts = require('./routes/posts')
+app.use('/', main)
+app.use('/posts', posts)
 
 app.listen(port, hostname, ()=> {
   console.log(`Server is running, http://${hostname}:${port}/`)
