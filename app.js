@@ -4,6 +4,15 @@ const exphbs =require('express-handlebars');
 const app = express()
 const port = 3000
 const hostname = '127.0.0.1'
+const mongoose = require('mongoose') 
+//mongoDByi indirip projemize require ettik
+
+//MongoDB'e baglanti oluşturduk
+mongoose.connect('mongodb://127.0.0.1/nodeblog_db',{
+  useNewUrlParser : true,
+  useUnifiedTopology : true
+})
+
 
 //middleware 
 app.use(express.static('public'))
