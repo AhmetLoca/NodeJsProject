@@ -4,8 +4,10 @@ const app = express()
 const port = 3000
 const hostname = '127.0.0.1'
 const mongoose = require('mongoose') 
-//mongoDByi indirip projemize require ettik
 const bodyParser = require('body-parser')
+//mongoDByi indirip projemize require ettik
+const fileUpload = require('express-fileupload')
+
 
 //MongoDB'e baglanti oluşturduk
 mongoose.connect('mongodb://127.0.0.1/nodeblog_db',{
@@ -13,13 +15,16 @@ mongoose.connect('mongodb://127.0.0.1/nodeblog_db',{
   useUnifiedTopology : true
 })
 
+app.use(fileUpload())
+
 
 //middleware 
 app.use(express.static('public'))
 //index.html 'de herhangi bir statik dosyaya bakmak istiyorsa önce public dosyamızın içerisine gidiyor. Sonra public dosyasının içerisindeki css dosyasına gidiyor. Ve oradaki css dosyalarını çekiyor. 
 
 app.engine('handlebars',exphbs.engine()) 
-//exphbs fonksiyonu default olarak layout klasörünün içerisine girip main.handlebars'i alıyor
+//exphbs fonksiyonu default olarak layout klasörünün içerisine girip main.handlebars'i alıyor.
+
 app.set('view engine','handlebars')
 
 //parse application/x-www.-form-urlencoded
