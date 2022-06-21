@@ -55,6 +55,25 @@ app.use(bodyParser.urlencoded({ extended : false }))
 app.use(bodyParser.json())
 
 
+//DISPLAY LINK Middleware
+
+app.use((req,res,next) => {
+  const {userId} = req.session
+  if(userId){
+    res.locals = {
+      displayLink : true
+    }
+  }
+    else{
+      res.locals = {
+      displayLink : false
+    }
+  }
+  next();
+})
+
+
+
 
 const main = require('./routes/main')
 const posts = require('./routes/posts.js')
