@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 //mongoDByi indirip projemize require ettik
 const fileUpload = require('express-fileupload')
+const generateDate = require('./helpers/generateDate').generateDate
 
 
 //MongoDB'e baglanti oluşturduk
@@ -22,7 +23,10 @@ app.use(fileUpload())
 app.use(express.static('public'))
 //index.html 'de herhangi bir statik dosyaya bakmak istiyorsa önce public dosyamızın içerisine gidiyor. Sonra public dosyasının içerisindeki css dosyasına gidiyor. Ve oradaki css dosyalarını çekiyor. 
 
-app.engine('handlebars',exphbs.engine()) 
+
+
+
+app.engine('handlebars', exphbs.engine({helpers:{generateDate:generateDate}})) 
 //exphbs fonksiyonu default olarak layout klasörünün içerisine girip main.handlebars'i alıyor.
 
 app.set('view engine','handlebars')
