@@ -8,9 +8,15 @@ router.get('/register',(req,res) => {
 
 router.post('/register',(req,res) => {
   User.create({
-    ...req.body 
+    ...req.body
    })
-  res.redirect('/')
+
+   req.session.sessionFlash = {
+    type: 'alert alert-success',
+    message : 'User is created successfully'
+  }
+
+  res.redirect('/users/login')
   })
 
   router.get('/login',(req,res) => {
@@ -24,6 +30,7 @@ router.post('/register',(req,res) => {
       if(user){
         if(user.password == password){
             //User Session
+            req.session.userId = user._id 
             res.redirect('/')
         }else{
           res.redirect('/users/login')

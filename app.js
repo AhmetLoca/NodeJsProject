@@ -8,13 +8,30 @@ const bodyParser = require('body-parser')
 //mongoDByi indirip projemize require ettik
 const fileUpload = require('express-fileupload')
 const generateDate = require('./helpers/generateDate').generateDate
-
+const expressSession = require('express-session')
 
 //MongoDB'e baglanti oluşturduk
 mongoose.connect('mongodb://127.0.0.1/nodeblog_db',{
   useNewUrlParser : true,
   useUnifiedTopology : true
 })
+
+
+app.use(expressSession({
+  secret: 'test',
+  resave:false,
+  saveUninitialized: true,
+}));
+
+// Flash - Message Middleware
+
+app.use((req,res,next)=> {
+  res.locals.sessionFlash = req.session.sessionFlash
+  delete req.session.sessionFlash
+  next()
+})
+
+
 
 app.use(fileUpload())
 
